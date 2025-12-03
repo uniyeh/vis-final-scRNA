@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,13 @@
         .sidebar {
             transition: margin-left 0.3s ease-in-out;
         }
+
         .sidebar.hidden {
             margin-left: -16rem;
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <div class="flex h-screen overflow-hidden">
         <!-- 側邊欄 -->
@@ -26,52 +29,69 @@
                 <h1 class="text-xl font-bold">scRNA 分析</h1>
                 <p class="text-xs text-gray-400 mt-1">Flask 驅動</p>
             </div>
-            
+
             <nav class="p-4">
                 <!-- 首頁總覽 -->
-                <button onclick="loadPage('home')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                <button onclick="loadPage('home')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
                     </svg>
                     <span>首頁總覽</span>
                 </button>
 
                 <!-- 數據標準化 -->
-                <button onclick="loadPage('normalize')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                <button onclick="loadPage('normalize')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                     </svg>
                     <span>數據標準化</span>
                 </button>
 
                 <!-- UMAP 視覺化 -->
-                <button onclick="loadPage('umap')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                <button onclick="loadPage('umap')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                        </path>
                     </svg>
                     <span>UMAP 視覺化</span>
                 </button>
 
                 <!-- 基因表達熱圖 -->
-                <button onclick="loadPage('heatmap')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                <button onclick="loadPage('heatmap')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                        </path>
                     </svg>
                     <span>基因表達熱圖</span>
                 </button>
 
                 <!-- 細胞類型註釋 -->
-                <button onclick="loadPage('annotation')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                <button onclick="loadPage('annotation')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                        </path>
                     </svg>
                     <span>細胞類型註釋</span>
                 </button>
 
                 <!-- QC 質控報告 -->
-                <button onclick="loadPage('qc')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                <button onclick="loadPage('qc')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                        </path>
                     </svg>
                     <span>QC 質控報告</span>
                 </button>
@@ -87,7 +107,8 @@
             <header class="bg-white shadow-sm px-6 py-4 flex items-center gap-4">
                 <button onclick="toggleSidebar()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
                 <h2 id="page-title" class="text-lg font-semibold text-gray-700">首頁總覽</h2>
@@ -102,51 +123,44 @@
                         <h2 class="text-2xl font-bold mb-2">🧬 歡迎使用</h2>
                         <p class="text-blue-100">完整專案結構已建立，請告訴我需要什麼內容</p>
                     </div>
-                    <section id='scroll'>
-                            <!--  graphic container  -->
-                            <div class='scroll__graphic'>
-                                <!--   actual graphic/chart   -->
-                                <div class='chart'>
-                                    <p>0</p>
-                                </div>
-                            </div>
+                    <!-- Scrollable Card Container -->
+                    <div class="flex flex-col gap-8 items-center py-4">
+                        <!-- Card 1 -->
+                        <div
+                            class="w-[90%] aspect-[2/1] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-blue-600 mb-4">Step 1: Data Loading</h2>
+                            <p class="text-gray-600 text-lg">Load and preprocess your scRNA-seq data from various
+                                sources</p>
+                        </div>
 
-                            <!--  step/text container  -->
-                            <div class='scroll__text'>
-                                <div class='step' data-step='1'>
-                                    <p>STEP 1</p>
-                                </div>
-                                <div class='step' data-step='2'>
-                                    <p>STEP 2</p>
-                                </div>
-                                <div class='step' data-step='3'>
-                                    <p>STEP 3</p>
-                                </div>
-                                <div class='step' data-step='4'>
-                                    <p>STEP 4</p>
-                                </div>
-                            </div>
-                        </section>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                            <h3 class="font-semibold text-lg mb-2">數據標準化</h3>
-                            <p class="text-gray-600 text-sm">等待內容...</p>
+                        <!-- Card 2 -->
+                        <div
+                            class="w-[90%] aspect-[2/1] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-purple-600 mb-4">Step 2: Quality Control</h2>
+                            <p class="text-gray-600 text-lg">Filter cells and genes based on quality metrics</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                            <h3 class="font-semibold text-lg mb-2">UMAP 視覺化</h3>
-                            <p class="text-gray-600 text-sm">等待內容...</p>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="w-[90%] aspect-[2/1] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-green-600 mb-4">Step 3: Normalization</h2>
+                            <p class="text-gray-600 text-lg">Normalize expression values and identify highly variable
+                                genes</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                            <h3 class="font-semibold text-lg mb-2">基因表達熱圖</h3>
-                            <p class="text-gray-600 text-sm">等待內容...</p>
+
+                        <!-- Card 4 -->
+                        <div
+                            class="w-[90%] aspect-[2/1] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-orange-600 mb-4">Step 4: Visualization</h2>
+                            <p class="text-gray-600 text-lg">Generate UMAP plots and explore cell clusters</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                            <h3 class="font-semibold text-lg mb-2">細胞類型註釋</h3>
-                            <p class="text-gray-600 text-sm">等待內容...</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                            <h3 class="font-semibold text-lg mb-2">QC 質控報告</h3>
-                            <p class="text-gray-600 text-sm">等待內容...</p>
+
+                        <!-- Card 5 -->
+                        <div
+                            class="w-[90%] aspect-[2/1] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col justify-center">
+                            <h2 class="text-3xl font-bold text-red-600 mb-4">Step 5: Analysis</h2>
+                            <p class="text-gray-600 text-lg">Perform differential expression and cell type annotation
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -155,8 +169,8 @@
                 <div id="normalize-page" class="page-content hidden">
                     <h1 class="text-3xl font-bold text-gray-800 mb-6">數據標準化</h1>
                     <!-- <div class="bg-white p-8 rounded-lg shadow"> -->
-                        
-                        <!-- <p class="text-gray-500 text-center text-lg">空白頁面，等待你的內容指示</p> -->
+
+                    <!-- <p class="text-gray-500 text-center text-lg">空白頁面，等待你的內容指示</p> -->
                     <!-- </div> -->
                 </div>
 
@@ -198,4 +212,5 @@
     <!-- 引用 JavaScript  -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
+
 </html>

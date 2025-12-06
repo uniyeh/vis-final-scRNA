@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scRNA-seq 分析平台</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <style>
+        .sidebar {
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .sidebar.hidden {
+            margin-left: -16rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- 側邊欄 -->
+        <aside id="sidebar" class="sidebar w-64 bg-gray-800 text-white flex-shrink-0">
+            <div class="p-4 border-b border-gray-700">
+                <h1 class="text-xl font-bold">scRNA 分析</h1>
+                <p class="text-xs text-gray-400 mt-1">Flask 驅動</p>
+            </div>
+
+            <nav class="p-4">
+                <!-- 資料說明 -->
+                <button onclick="loadPage('home')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span>資料說明</span>
+                </button>
+
+                <!-- 降維分析 -->
+                <button onclick="loadPage('downsampling')"
+                    class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 text-gray-300 hover:bg-gray-700 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    <span>降維分析</span>
+                </button>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gray-900 text-xs text-gray-400">
+            </div>
+        </aside>
+
+        <!-- 主內容區 -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- 頂部欄（包含隱藏側邊欄的按鈕） -->
+            <header class="bg-white shadow-sm px-6 py-4 flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <h2 id="page-title" class="text-lg font-semibold text-gray-700">首頁總覽</h2>
+            </header>
+
+            <!-- 內容區 -->
+            <main id="main-content" class="flex-1 overflow-auto p-6">
+                <!-- 頁面內容將通過 JavaScript 動態載入 -->
+            </main>
+        </div>
+    </div>
+
+    <!-- 引用 JavaScript  -->
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>

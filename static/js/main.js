@@ -9,13 +9,22 @@ function parseMarkdown(container) {
     // Find all markdown script tags
     const markdownScripts = container.querySelectorAll('script[type="text/markdown"]');
 
-    markdownScripts.forEach((script, index) => {
-        const markdownId = script.id;
-        const contentId = `card-content-${index + 1}`;
-        const contentDiv = container.querySelector(`#${contentId}`);
+    // Explicit mapping: script ID -> card content ID
+    const contentMapping = {
+        'markdown-data': 'card-dataset',
+        'markdown-downsampling-page': 'card-downsampling',
+        'markdown-reference': 'card-reference'
+    };
 
-        if (contentDiv && script.textContent) {
-            contentDiv.innerHTML = marked.parse(script.textContent);
+    markdownScripts.forEach((script) => {
+        const scriptId = script.id;
+        const contentId = contentMapping[scriptId];
+
+        if (contentId) {
+            const contentDiv = container.querySelector(`#${contentId}`);
+            if (contentDiv && script.textContent) {
+                contentDiv.innerHTML = marked.parse(script.textContent);
+            }
         }
     });
 }
@@ -70,7 +79,7 @@ async function loadPage(pageName, event = null) {
                 targetPage.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-4"><p class="text-red-800">頁面載入失敗</p></div>';
             }
         } catch (error) {
-            console.error('載入頁面失敗:', error);
+            console.error('Loading Failed:', error);
             targetPage.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-4"><p class="text-red-800">頁面載入錯誤</p></div>';
         }
     }
@@ -104,8 +113,8 @@ async function loadPage(pageName, event = null) {
 
     // 更新頁面標題
     const titles = {
-        'home': '資料說明',
-        'downsampling': '降維分析'
+        'home': 'Overview',
+        'downsampling': 'Dimensionality Reduction Analysis'
     };
     document.getElementById('page-title').textContent = titles[pageName] || pageName;
 }

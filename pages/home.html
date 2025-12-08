@@ -65,81 +65,122 @@
 
     .card-icon {
         font-size: 3.5rem;
-        margin-bottom: 12px;
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 32px;
     }
 </style>
 
 <div class="max-w-7xl mx-auto">
-    <h1 class="font-bold text-white mb-6" style="font-size: 60px;">scRNA 視覺化分析</h1>
+    <h1 class="font-bold text-white mb-6" style="font-size: 60px;">scRNA Visualization</h1>
     <div class="hero-gradient p-10 rounded-2xl mb-10">
         <div class="flex items-center gap-4 mb-4">
             <span style="font-size: 60px;">🧬</span>
-            <h2 class="font-bold text-white" style="font-size: 48px;">歡迎使用</h2>
+            <h2 class="font-bold text-white" style="font-size: 48px;">Welcome</h2>
         </div>
-        <p class="text-gray-300" style="font-size: 24px; line-height: 1.6;">組員:吳帛恩、葉子禎、徐鈺蓉。<br>
-            以下是本次專案的<strong class="text-white">研究動機、數據集</strong>及<strong class="text-white">相關研究</strong>摘要。</p>
+        <p class="text-gray-300" style="font-size: 24px; line-height: 1.6;">Author: 吳帛恩、葉子禎、徐鈺蓉<br>
+            This project is an interactive visualization web platform designed to present scRNA-seq analysis results
+            from mice across different ages. It allows users to intuitively compare cell population distributions, gene
+            expression changes, and potential biological differences between groups.
     </div>
 
     <div class="flex flex-col gap-8 py-6">
         <div class="markdown-card rounded-2xl p-12 transition-all duration-300">
-            <div class="card-icon">📊</div>
-            <h2 class="font-bold text-white mb-8" style="font-size: 48px;">數據集 (GSE161340)</h2>
-            <div class="markdown-content" id="card-content-3"></div>
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <h2 class="font-bold text-white" style="font-size: 48px;">Dataset</h2>
+            </div>
+            <div class="markdown-content" id="card-dataset"></div>
         </div>
 
         <div class="markdown-card rounded-2xl p-12 transition-all duration-300">
-            <div class="card-icon">🎯</div>
-            <h2 class="font-bold text-white mb-8" style="font-size: 48px;">研究動機與預期任務</h2>
-            <div class="markdown-content" id="card-content-1"></div>
+            <div class="card-header">
+                <div class="card-icon">🎯</div>
+                <h2 class="font-bold text-white" style="font-size: 48px;">Dimensionality Reduction Analysis Page</h2>
+            </div>
+            <div class="markdown-content" id="card-downsampling"></div>
         </div>
 
         <div class="markdown-card rounded-2xl p-12 transition-all duration-300">
-            <div class="card-icon">📚</div>
-            <h2 class="font-bold text-white mb-8" style="font-size: 48px;">相關研究參考</h2>
-            <div class="markdown-content" id="card-content-2"></div>
+            <div class="card-header">
+                <div class="card-icon">📚</div>
+                <h2 class="font-bold text-white" style="font-size: 48px;">Reference</h2>
+            </div>
+            <div class="markdown-content" id="card-reference"></div>
         </div>
     </div>
 </div>
 
-<script id="markdown-1" type="text/markdown">
-### Cluster / Characterize Distribution
-探索具有相似細胞比例的 **spot 群體**，發現潛在的結構與空間模式。
+<script id="markdown-data" type="text/markdown">
+### Source Dataset: GSE161340
+  - Single Cell and Single Nucleus Droplet Based RNA-sequencing of hippocampus tissue of 4 month and 24 month old mice.
+  - Including 1,544 individual cells, 27,998 unique genes, and a total of 3,214,219 non-zero gene counts. 
 
-### 
-
-### Correlate
-分析細胞組成特徵與組織影像區域間的**對應與關聯性**。
-
-* **Discover → Compare → Clusters:** 比較不同群集在基因表現上的差異。
-* **Discover → Correlate → Gene-Cluster Relationships:** 分析特定基因與特定群集的相關性。
+---
+### Processing
+  - Data was processed using Scanpy in Python.
+  - Integration performed using SupCPM.
+  - Exported to optimized JSON files for web performance using `export_integration_data.py`.
 </script>
 
-<script id="markdown-2" type="text/markdown">
+<script id="markdown-downsampling-page" type="text/markdown">
+### 1. Data Visualization (Center Panel)
+- **Scatter Plot**: Displays ~1,500 cells/nuclei in a 2D embedding space.
+- **Methods Supported**:
+  - **SupCPM**: Supervised Capacity Preserving Mapping (Custom integration method).
+  - **UMAP**: Uniform Manifold Approximation and Projection.
+  - **t-SNE**: t-Distributed Stochastic Neighbor Embedding.
+  - **PCA**: Principal Component Analysis.
+- **Interactions**:
+  - **Zoom/Pan**: Use mouse wheel to zoom, click and drag to pan.
+  - **Hover**: View basic cell information (ID, Type, Cluster).
+  - **Click**: Select a specific cell to view detailed statistics.
+
+----
+### 2. Control Panel (Top Left)
+The main control hub for the dashboard:
+- **Embedding Method**: Switch between different dimensionality reduction techniques (SupCPM, UMAP, t-SNE, PCA).
+- **View Mode**:
+  - **Type**: Color cells by sequencing type (scRNA vs. snRNA).
+  - **Cluster**: Color cells by their identified cluster (Leiden clustering).
+- **Gene Expression**:
+  - Dropdown menu to select specific genes.
+  - Coloring changes to a blue gradient representing expression intensity (Low to High).
+  - **Gene Selection Logic**: The available genes include:
+    - **All Variable Genes**: Includes all 2000 highly variable genes (HVGs) identified during the analysis pipeline.
+    - **Top Expressed Genes**: Includes high-expression housekeeping genes.
+    - **Marker Genes**: Includes cell-type specific markers for detailed exploration.
+- **Search**:
+  - **Autocomplete**: Type a Cell ID to see matching suggestions.
+  - **Highlight**: Selecting a cell highlights it in the plot and dims others.
+- **Filter**: Slider to hide low-quality cells based on the minimum number of detected genes.
+
+----
+### 3. Details Panel (Right)
+Appears when a cell is selected:
+- **Metadata**: Shows Cell ID, Gene Count, Mitochondrial Percentage, Type, and Cluster.
+- **Marker Genes Chart**: Displays the expression levels of key marker genes for the selected cell as a bar chart.
+
+---
+### 4. Minimap (Bottom Right)
+- Provides a high-level view of the entire dataset.
+- The blue rectangle indicates the current viewport area.
+- Click or drag on the minimap to navigate quickly.
+
+</script>
+
+<script id="markdown-reference" type="text/markdown">
 ### Bio+MedVis Challenge @ IEEE VIS 2024
-Kleshchevnikov, V., Shmatko, A., Dann, E. et al. *Cell2location maps fine-grained cell types in spatial transcriptomics.* Nat Biotechnol 40, 661–671 (2022). [DOI 連結](https://doi.org/10.1038/s41587-021-01139-4)
+Kleshchevnikov, V., Shmatko, A., Dann, E. et al. *Cell2location maps fine-grained cell types in spatial transcriptomics.* Nat Biotechnol 40, 661–671 (2022). [DOI Link](https://doi.org/10.1038/s41587-021-01139-4)
 
 ### 
 
 ### Reference-free cell type deconvolution
-Miller, B.F., Huang, F., Atta, L. et al. *Reference-free cell type deconvolution of multi-cellular pixel-resolution spatially resolved transcriptomics data.* Nat Commun 13, 2339 (2022). [DOI 連結](https://doi.org/10.1038/s41467-022-30033-z)
-</script>
-
-<script id="markdown-3" type="text/markdown">
-### 數據類型與規模 (snRNA-seq / scRNA-seq)
-總計 **8 samples**，分為兩組：**年輕/年老小鼠**（基準線/重覆樣本）及 **年輕/年老小鼠**（處理組：Dasatinib + Quercetin 藥物）。
-
----
-
-### 主要屬性與分組
-物種：**小鼠** (*Mus musculus*)。組織：**海馬迴** (Hippocampus)。
-
-* **對照組 / 基準線 (Control / Baseline):** 觀察自然老化過程中不同腦細胞類型是否有變化。
-* **實驗組 / 處理組 (Experimental / Treatment):** 驗證清除衰老細胞的治療效果。
-
----
-
-### 樣本內容 (matrix.mtx)
-包含 **1,544** 個獨立細胞，**27,998** 個獨特基因，總計 **3,214,219** 個非零 (non-zero) 基因計數。
+Miller, B.F., Huang, F., Atta, L. et al. *Reference-free cell type deconvolution of multi-cellular pixel-resolution spatially resolved transcriptomics data.* Nat Commun 13, 2339 (2022). [DOI Link](https://doi.org/10.1038/s41467-022-30033-z)
 </script>
 
 <!-- Markdown parsing is handled by main.js -->

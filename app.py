@@ -91,6 +91,16 @@ datasets = {
 def index():
     return send_from_directory(BASE_DIR, "index.html")
 
+# 提供 pages 目錄中的 HTML 檔案
+@app.route('/pages/<path:filename>')
+def serve_pages(filename):
+    return send_from_directory(os.path.join(BASE_DIR, 'pages'), filename)
+
+# 提供 downsampling 目錄中的檔案
+@app.route('/downsampling/<path:filename>')
+def serve_downsampling(filename):
+    return send_from_directory(os.path.join(BASE_DIR, 'downsampling'), filename)
+
 # API - 獲取資料集列表
 @app.route('/api/datasets', methods=['GET'])
 def get_datasets():

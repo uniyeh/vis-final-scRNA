@@ -49,6 +49,8 @@ Thumbs.db
 
 # Large data files
 GSE161340/
+GSE161340.zip
 *.h5ad
 *.mtx
 *.mtx.gz
+*.bak

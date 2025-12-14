@@ -103,7 +103,7 @@ venv\Scripts\activate  # On Windows
 
 4. Install Python dependencies:
 ```bash
-pip install -r requirememt.txt
+pip install -r requirements.txt
 ```
 
 Required packages:
@@ -122,23 +122,26 @@ install.packages("Seurat")
 
 ### Running the Application
 
-**Option 1: Using app.py (Recommended for API features)**
+**Option 1: Using app.py (Recommended)**
 ```bash
 python app.py
 ```
 Then open: http://localhost:5001
 
-**Option 2: Using server.py (For gene expression analysis with R)**
+This provides:
+- Full application features
+- API endpoints for dataset loading
+- Proper routing for all resources
+
+**Option 2: Using server.py (For R-based gene expression analysis)**
 ```bash
 python server.py
 ```
 Then open: http://localhost:8000
 
-**Option 3: Simple HTTP server**
-```bash
-python -m http.server 8000
-```
-Then open: http://localhost:8000
+This provides:
+- R script integration for gene expression analysis
+- Real-time gene feature computation
 
 ### Application Features
 
@@ -175,20 +178,28 @@ The application provides three main sections:
 ```
 vis-final-scRNA/
 ├── app.py                 # Flask application and API endpoints
+├── server.py              # Flask server with R integration
 ├── index.html             # Main application entry point
-├── requirememt.txt        # Python dependencies
+├── requirements.txt       # Python dependencies
 ├── pages/
 │   ├── home.html          # Overview page
-│   └── downsampling.html  # DR analysis page
+│   ├── downsampling.html  # DR analysis page
+│   └── analysis.html      # Gene feature analysis page
 ├── static/
 │   └── js/
 │       └── main.js        # Client-side JavaScript
+├── codes/
+│   ├── rscripts/          # R scripts for analysis
+│   ├── density_cluster.py # Clustering algorithms
+│   └── ...                # Other analysis scripts
 ├── downsampling/
 │   └── data/              # Preprocessed visualization data (JSON)
 ├── analysis/
 │   └── dataloader.py      # Data loading utilities
-├── GSE161340/             # Raw dataset files
-└── cache/                 # Cached analysis results
+└── GSE161340/             # Dataset (download from releases)
+    ├── raw/               # Original GEO dataset files
+    ├── processed/         # Processed data and gene expressions
+    └── cache/             # Cached analysis results
 ```
 
 ## Technologies Used

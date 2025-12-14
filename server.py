@@ -178,8 +178,8 @@ def rds_check():
     name = request.get_data(as_text=True).strip()
     if not name.endswith(".rds"):
         name = name + ".rds"
-    
-    path = os.path.join(RSCRIPTS_DIR, "rds", name)
+
+    path = os.path.join(BASE_DIR, "GSE161340", "processed", "rds", name)
     exists = os.path.exists(path)
     body = "true" if exists else "false"
     return (body, 200, {"Content-Type": "text/plain; charset=utf-8"})
